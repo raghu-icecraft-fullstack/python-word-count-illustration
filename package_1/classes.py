@@ -1,10 +1,11 @@
 '''
     Author: Gautam Gadipudi
 '''
-from lib.util import read_file
+from package_1.util import read_file
+
 
 class WordCounter:
-    __slots__ = ["file", "counter"]
+    _slots = ["file", "counter"]
 
     def __init__(self, file: str):
         '''
@@ -14,20 +15,20 @@ class WordCounter:
         self.file = file
 
         # set the counter property
-        self.counter = self.__get_word_count__()
+        self.counter_dict = self._get_word_count()
 
-    def __get_words__(self, content: str) -> list:
+    def _get_words(self, content: str) -> list:
         '''
             Get words from a content.
 
             1. Replace special characters
             2. Split the content using whitespace
         '''
-        return content\
-                    .replace("!@#$%^&*()[]{};:,./<>?\|`~-=_+\"“()\n", "")\
-                    .split()
+        return content \
+            .replace("!@#$%^&*()[]{};:,./<>?\|`~-=_+\"“()\n", "") \
+            .split()
 
-    def __get_word_count__(self) -> dict:
+    def _get_word_count(self) -> dict:
         '''
             Get a dictionary with key as word and value as count of that word.
 
@@ -40,7 +41,7 @@ class WordCounter:
         content = read_file(self.file)
 
         # get all words as a list
-        words = self.__get_words__(content)
+        words = self._get_words(content)
 
         # declare an empty dictionary
         word_count_dic = {}
@@ -64,11 +65,11 @@ class WordCounter:
         '''
             Get the value of counter.
         '''
-        return self.counter
+        return self.counter_dict
 
     def print_count(self):
         '''
             Print each word and its count on each line.
         '''
-        for word in self.counter:
-            print(f"{word}: {self.counter[word]}")
+        for word in self.counter_dict:
+            print(f"{word}: {self.counter_dict[word]}")
